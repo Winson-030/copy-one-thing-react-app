@@ -1,19 +1,28 @@
 
 //libraries imports
-import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
+import { ArrowRightCircleIcon, SunIcon } from '@heroicons/react/24/solid'
 import { LanguageIcon } from '@heroicons/react/24/solid'
+import { MoonIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 
 
 const Form = ({ thing, handleInput, handleSubmit }) => {
-    const [isEng,setIsEng] = useState(true)
+    const [isEng, setIsEng] = useState(true)
     const handleLanguage = () => {
         setIsEng(!isEng)
+    }
+    const handleNight = () => {
+
+        document.documentElement.classList.add('dark')
+
+    }
+    const handleLight = () => {
+        document.documentElement.classList.remove('dark')
     }
     return (
         <>
             <h1 className='text-3xl sm:text-6xl font-bold text-center'>{
-                isEng? "What is your \"One Thing\"?" : "随便输入看看"
+                isEng ? "What is your \"One Thing\"?" : "随便输入看看"
             }</h1>
 
             <form className='flex ring-4 rounded-md ring-slate-200  dark:ring-slate-800 focus-within:ring-teal-600 focus-within:ring-offset-4 bg-slate-200 ring-offset-slate-200 dark:ring-offset-slate-800'
@@ -32,15 +41,32 @@ const Form = ({ thing, handleInput, handleSubmit }) => {
                 >
                     <ArrowRightCircleIcon className="h-12 w-12 pointer-events-none" />
                 </button>
-               
+
             </form>
-            <button
+            <div className="flex-auto">
+                <button
                     className='bg-inherit rounded-md font-sans py-2 pr-6 focus:outline-none focus:text-teal-600 hover:text-teal-600'
                     onClick={handleLanguage}
                     autoFocus
                 >
                     <LanguageIcon className="h-12 w-12 pointer-events-none" />
                 </button>
+                <button
+                    className='bg-inherit rounded-md font-sans py-2 pr-6 focus:outline-none focus:text-teal-600 hover:text-teal-600'
+                    onClick={handleNight}
+                    autoFocus
+                >
+                    <MoonIcon className="h-12 w-12 pointer-events-none" />
+                </button>
+                <button
+                    className='bg-inherit rounded-md font-sans py-2 pr-6 focus:outline-none focus:text-teal-600 hover:text-teal-600'
+                    onClick={handleLight}
+                    autoFocus
+                >
+                    <SunIcon className="h-12 w-12 pointer-events-none" />
+                </button>
+            </div>
+
         </>
     )
 }

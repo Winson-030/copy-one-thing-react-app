@@ -19,6 +19,7 @@ const getSuccessMessage = () => {
  
   return messages[Math.floor(Math.random() * messages.length)];
 }
+
 const getEmoji = () => {
   const emojis = ["🫡", "📈", "🚀", "💻", "😄", "🕳️", "🐮", "⚡️", "🇲🇴", "😯", "🏃"]
   const newEmojis = [];
