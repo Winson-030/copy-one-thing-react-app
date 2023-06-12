@@ -8,17 +8,22 @@ import { useState } from 'react'
 
 const Form = ({ thing, handleInput, handleSubmit }) => {
     const [isEng, setIsEng] = useState(true)
+    const [isNight,setIsNight] = useState(true)
     const handleLanguage = () => {
         setIsEng(!isEng)
     }
     const handleNight = () => {
+        if (isNight === true) {
+            document.documentElement.classList.add('dark') 
+        }else{
+            document.documentElement.classList.remove('dark')
+        }
 
-        document.documentElement.classList.add('dark')
+        setIsNight(!isNight)
+        
 
     }
-    const handleLight = () => {
-        document.documentElement.classList.remove('dark')
-    }
+
     return (
         <>
             <h1 className='text-3xl sm:text-6xl font-bold text-center'>{
@@ -56,15 +61,18 @@ const Form = ({ thing, handleInput, handleSubmit }) => {
                     onClick={handleNight}
                     autoFocus
                 >
-                    <MoonIcon className="h-12 w-12 pointer-events-none" />
+                    {
+                     !isNight ? <MoonIcon className="h-12 w-12 pointer-events-none" /> :<SunIcon className="h-12 w-12 pointer-events-none" />
+                    }
+                    
                 </button>
-                <button
+                {/* <button
                     className='bg-inherit rounded-md font-sans py-2 pr-6 focus:outline-none focus:text-teal-600 hover:text-teal-600'
                     onClick={handleLight}
                     autoFocus
                 >
                     <SunIcon className="h-12 w-12 pointer-events-none" />
-                </button>
+                </button> */}
             </div>
 
         </>
