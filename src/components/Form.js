@@ -6,24 +6,13 @@ import { MoonIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 
 
-const Form = ({ thing, handleInput, handleSubmit }) => {
+const Form = ({ thing, handleInput, handleSubmit, isNight ,handleNight }) => {
     const [isEng, setIsEng] = useState(true)
-    const [isNight,setIsNight] = useState(true)
+
     const handleLanguage = () => {
         setIsEng(!isEng)
     }
-    const handleNight = () => {
-        if (isNight === true) {
-            document.documentElement.classList.add('dark') 
-        }else{
-            document.documentElement.classList.remove('dark')
-        }
-
-        setIsNight(!isNight)
-        
-
-    }
-
+    
     return (
         <>
             <h1 className='text-3xl sm:text-6xl font-bold text-center'>{

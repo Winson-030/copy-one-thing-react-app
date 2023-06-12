@@ -35,7 +35,21 @@ const getEmoji = () => {
 function App() {
   const [thing, setThing] = useState("")
   const [isCompleted, setIsCompleted] = useState(true)
-  
+  const [isNight, setIsNight] = useState(true)
+
+  const handleNight = () => {
+    console.log(isNight);
+    if (isNight === true) {
+        document.documentElement.classList.add('dark') 
+    }else{
+        document.documentElement.classList.remove('dark')
+    }
+
+    setIsNight(!isNight)
+    
+
+}
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,6 +79,13 @@ function App() {
     e.target.removeAttribute('disabled');
     setThing("");
     setIsCompleted(true);
+// make night toggle icon follow night mode 
+    if (isNight === true) {
+      setIsNight(true)
+    } else {
+      setIsNight(false)
+    }
+  
   }
   return (
     <main className="grid place-items-center min-h-screen bg-gradient-to-b from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 text-slate-900 dark:text-slate-200">
@@ -75,6 +96,8 @@ function App() {
             thing={thing}
             handleInput={handleInput}
             handleSubmit={handleSubmit}
+            handleNight={handleNight}
+            isNight={isNight}
           />
 
           )
