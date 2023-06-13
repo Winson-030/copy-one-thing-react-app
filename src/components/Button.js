@@ -18,7 +18,7 @@ const getEmoji = () => {
   }
 const Button = ({ text }) => {
 
-    const { thing,setThing, isEng,setIsEng ,setIsCompleted,setIsNight,isNight} = useContext(Context)
+    const { setThing, isEng,setIsCompleted,setIsNight,isNight} = useContext(Context)
     
     const getSuccessMessage = () => {
         let messages = []

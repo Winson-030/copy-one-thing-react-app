@@ -37,7 +37,7 @@ const Form = () => {
       setThing(e.target.value);
     }
 
-const {isNight, setIsNight,thing,setThing,isCompleted,setIsCompleted,isEng,setIsEng} = useContext(Context)
+const {isNight, setIsNight,thing,setThing,setIsCompleted,isEng,setIsEng} = useContext(Context)
     
     return (
         <>
