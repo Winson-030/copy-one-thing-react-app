@@ -11,14 +11,7 @@ import Form from './components/Form';
 import OneThing from './components/OneThing';
 
 const jsConfetti = new JSConfetti()
-const getSuccessMessage = () => {
 
-
-  const  messages =  ["Congrats!", "Great job!", "Don’t ya feel great?!", "Up, up, and up!", "Um…okay", "Did you though?", "Don’t feel like you tried your best…", "FAget about it!"];
-
- 
-  return messages[Math.floor(Math.random() * messages.length)];
-}
 
 const getEmoji = () => {
   const emojis = ["🫡", "📈", "🚀", "💻", "😄", "🕳️", "🐮", "⚡️", "🇲🇴", "😯", "🏃"]
@@ -37,6 +30,25 @@ function App() {
   const [isCompleted, setIsCompleted] = useState(true)
   const [isNight, setIsNight] = useState(true)
 
+
+  const [isEng, setIsEng] = useState(true)
+
+  const handleLanguage = () => {
+      setIsEng(!isEng)
+  }
+
+  const getSuccessMessage = () => {
+    let messages = []
+    if (isEng) {
+      messages =  ["Congrats!", "Great job!", "Don’t ya feel great?!", "Up, up, and up!", "Um…okay", "Did you though?", "Don’t feel like you tried your best…", "FAget about it!"];
+    } else {
+      messages =  ["你好啊!", "做得不错!", "是不是觉得很棒?!", "再来再来!", "感觉还行", "你觉得怎样?", "你还可以再来一次", "来了!"];
+  
+    }
+  
+    return messages[Math.floor(Math.random() * messages.length)];
+  }
+
   const handleNight = () => {
     console.log(isNight);
     if (isNight === true) {
@@ -44,10 +56,7 @@ function App() {
     }else{
         document.documentElement.classList.remove('dark')
     }
-
     setIsNight(!isNight)
-    
-
 }
 
 
@@ -97,7 +106,9 @@ function App() {
             handleInput={handleInput}
             handleSubmit={handleSubmit}
             handleNight={handleNight}
+            handleLanguage={handleLanguage}
             isNight={isNight}
+            isEng={isEng}
           />
 
           )

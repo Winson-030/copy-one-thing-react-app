@@ -3,15 +3,11 @@
 import { ArrowRightCircleIcon, SunIcon } from '@heroicons/react/24/solid'
 import { LanguageIcon } from '@heroicons/react/24/solid'
 import { MoonIcon } from '@heroicons/react/24/solid'
-import { useState } from 'react'
 
 
-const Form = ({ thing, handleInput, handleSubmit, isNight ,handleNight }) => {
-    const [isEng, setIsEng] = useState(true)
 
-    const handleLanguage = () => {
-        setIsEng(!isEng)
-    }
+const Form = ({ thing, handleInput, handleSubmit, isNight ,handleNight ,isEng,handleLanguage}) => {
+
     
     return (
         <>
@@ -24,7 +20,7 @@ const Form = ({ thing, handleInput, handleSubmit, isNight ,handleNight }) => {
             >
                 <input type="text"
                     className='bg-inherit rounded-md font-sans text-slate-800  py-2 px-6 focus:outline-none text-xl sm:text-2xl placeholder:text-slate-400 caret-teal-600 appearance-none w-full'
-                    placeholder='Enter one thing'
+                    placeholder={isEng? 'Enter one thing':'敲点啥呗'}
                     autoFocus
                     maxLength={64}
                     value={thing}
@@ -55,13 +51,7 @@ const Form = ({ thing, handleInput, handleSubmit, isNight ,handleNight }) => {
                     }
                     
                 </button>
-                {/* <button
-                    className='bg-inherit rounded-md font-sans py-2 pr-6 focus:outline-none focus:text-teal-600 hover:text-teal-600'
-                    onClick={handleLight}
-                    autoFocus
-                >
-                    <SunIcon className="h-12 w-12 pointer-events-none" />
-                </button> */}
+
             </div>
 
         </>
