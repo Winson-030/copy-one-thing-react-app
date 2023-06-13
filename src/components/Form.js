@@ -3,11 +3,41 @@
 import { ArrowRightCircleIcon, SunIcon } from '@heroicons/react/24/solid'
 import { LanguageIcon } from '@heroicons/react/24/solid'
 import { MoonIcon } from '@heroicons/react/24/solid'
+import { useContext } from 'react'
+import { Context } from './Context'
 
 
 
-const Form = ({ thing, handleInput, handleSubmit, isNight ,handleNight ,isEng,handleLanguage}) => {
+const Form = () => {
+    
+    const handleLanguage = () => {
+        setIsEng(!isEng)
+    }
+  
+    const handleNight = () => {
+      console.log(isNight);
+      if (isNight === true) {
+          document.documentElement.classList.add('dark') 
+      }else{
+          document.documentElement.classList.remove('dark')
+      }
+      setIsNight(!isNight)
+  }
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (thing.length !== 0) {
+        setIsCompleted(false)
+      } else {
+        alert("input is blank!")
+      }
+    }
+  
+    const handleInput = (e) => {
+      setThing(e.target.value);
+    }
 
+const {isNight, setIsNight,thing,setThing,isCompleted,setIsCompleted,isEng,setIsEng} = useContext(Context)
     
     return (
         <>

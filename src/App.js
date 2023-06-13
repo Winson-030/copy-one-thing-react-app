@@ -3,51 +3,30 @@ import { useState } from 'react';
 import { React } from 'react';
 
 
-// libraries
-import JSConfetti from 'js-confetti'
+
 
 //custom imports
 import Form from './components/Form';
 import OneThing from './components/OneThing';
+import { Context } from './components/Context';
 
-const jsConfetti = new JSConfetti()
 
 
-const getEmoji = () => {
-  const emojis = ["🫡", "📈", "🚀", "💻", "😄", "🕳️", "🐮", "⚡️", "🇲🇴", "😯", "🏃"]
-  const newEmojis = [];
-  const len = Math.floor(Math.random() * 10) + 1;
-  for (let i = 0; i < len; i++) {
-    const randomIndex = Math.floor(Math.random() * emojis.length);
-    newEmojis.push(emojis[randomIndex]);
-  }
 
-  return newEmojis;
-}
+
 
 function App() {
   const [thing, setThing] = useState("")
   const [isCompleted, setIsCompleted] = useState(true)
   const [isNight, setIsNight] = useState(true)
-
-
   const [isEng, setIsEng] = useState(true)
 
+ 
   const handleLanguage = () => {
       setIsEng(!isEng)
   }
 
-  const getSuccessMessage = () => {
-    let messages = []
-    if (isEng) {
-      messages =  ["Congrats!", "Great job!", "Don’t ya feel great?!", "Up, up, and up!", "Um…okay", "Did you though?", "Don’t feel like you tried your best…", "FAget about it!"];
-    } else {
-      messages =  ["你好啊!", "做得不错!", "是不是觉得很棒?!", "再来再来!", "感觉还行", "你觉得怎样?", "你还可以再来一次", "来了!"];
   
-    }
-  
-    return messages[Math.floor(Math.random() * messages.length)];
-  }
 
   const handleNight = () => {
     console.log(isNight);
@@ -76,32 +55,13 @@ function App() {
     setThing(e.target.value);
   }
 
-  const handleCompletedThing = async (e) => {
-    e.target.setAttribute('disabled', true)
-    setThing(getSuccessMessage())
-    await jsConfetti.addConfetti({
-      emojis: getEmoji(),
-      confettiNumber: 50,
-      confettiRadius: 6,
-      emojiSize: 30
-    })
-    e.target.removeAttribute('disabled');
-    setThing("");
-    setIsCompleted(true);
-// make night toggle icon follow night mode 
-    if (isNight === true) {
-      setIsNight(true)
-    } else {
-      setIsNight(false)
-    }
-  
-  }
+ 
   return (
     <main className="main">
-
+     
       <div className="grid place-items-center gap-8 m-8">
         {
-          isCompleted && (<Form
+          isCompleted && ( <Context.Provider value={{thing,setThing,isEng,setIsEng,isNight,setIsNight,isCompleted,setIsCompleted}}><Form
             thing={thing}
             handleInput={handleInput}
             handleSubmit={handleSubmit}
@@ -109,18 +69,21 @@ function App() {
             handleLanguage={handleLanguage}
             isNight={isNight}
             isEng={isEng}
-          />
+          /></Context.Provider>
 
           )
 
         }
         {
           !isCompleted && (
-            <OneThing thing={thing} handleCompletedThing={handleCompletedThing} />
+            <Context.Provider value={{thing , setThing,isCompleted,setIsCompleted,isEng ,setIsEng ,isNight,setIsNight}}>
+            <OneThing /></Context.Provider>
           )
         }
 
       </div>
+
+
 
     </main>
   );
